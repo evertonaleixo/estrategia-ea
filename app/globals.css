@@ -25,3 +25,24 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.container {
+  text-align: center;
+  padding: 20px;
+}
+.rounded-input {
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  padding: 10px;
+  width: 200px;
+  font-size: 16px;
+}
+.styled-button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}

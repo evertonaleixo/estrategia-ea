@@ -12,7 +12,7 @@ export default function Resultado(args: any) {
   return (
 
     <main className="flex flex-col items-center justify-between middle-full">
-      <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-80 rounded shadow-md">
+      <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-25 rounded shadow-md">
         <div>
           <h1>Ola, seu rendimento mensal é de {rendimento}</h1>
 

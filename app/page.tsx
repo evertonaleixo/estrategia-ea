@@ -24,7 +24,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-between middle-full">
-      <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-80 rounded shadow-md">
+      <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-25 rounded shadow-md">
         <div className="container">
           <h1 style={{ padding: '4rem', color: 'white', fontSize: 'larger' }}>
             Consultoria Financeira com <br /><b>Emerson Lima Aleixo</b>.

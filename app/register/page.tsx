@@ -33,7 +33,7 @@ const Register = () => {
 
   return (
     <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-80 rounded shadow-md">
+      <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-25 rounded shadow-md">
         <h1 className="text-2xl font-semibold mb-4">Criar Conta</h1>
         {isRegistered && (
           <p className="text-green-600 mb-4">Cadastro realizado com sucesso!</p>

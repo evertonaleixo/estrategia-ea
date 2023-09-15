@@ -38,14 +38,14 @@ export default function Home() {
 
           <input type="text"
             value={rendimentoMensal}
-            onChange={(e) => setRendimento(e.target.value)}
+            onChange={(e: any) => setRendimento(e.target.value)}
             className="rounded-input"
             name="rendimento"
             placeholder="RENDA" />
           <br /><br />
           <input type="number"
             value={idade}
-            onChange={(e) => setAge(e.target.value)}
+            onChange={(e: any) => setAge(e.target.value)}
             className="rounded-input"
             name="idade"
             placeholder="IDADE" />

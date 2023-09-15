@@ -13,7 +13,7 @@ const Register = () => {
   });
   const [isRegistered, setIsRegistered] = useState(false);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: any) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -21,7 +21,7 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
 
     // Aqui você pode adicionar lógica para registrar o usuário.

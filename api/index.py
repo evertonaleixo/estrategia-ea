@@ -16,7 +16,7 @@ DATABASE = []
 #     conn 
 
 
-@app.get("/users", response_model=List[Dict[str, str]])
+@app.get("/api/users", response_model=List[Dict[str, str]])
 def read_users():
     # users = get_users()
     users = [{
@@ -29,7 +29,7 @@ def read_users():
             } for user in DATABASE]
     return users
 
-@app.post("/register", response_model=dict)
+@app.post("/api/register", response_model=dict)
 def register_user(user: User):
     print('Enviando email')
 

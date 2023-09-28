@@ -9,7 +9,7 @@ from fastapi import FastAPI, HTTPException
 
 app = FastAPI()
 
-DATABASE = []
+DATABASE = [1, 2, 3]
 
 # @app.on_event("startup")  # This event handler will execute when the server starts
 # async def startup_db():
@@ -20,17 +20,13 @@ DATABASE = []
 def read_users():
     # users = get_users()
     users = [{
-            "name": user.name,
-            "email": user.email,
-            "password": user.password,
-            "birthdate": user.birthdate,
-            "state": user.state,
-            "city": user.city
+            "id": user,
             } for user in DATABASE]
     return users
 
 @app.get("/api/carros")
 def hello_world():
+    DATABASE.append(DATABASE[-1]+1)
     return {"message": "Carros."}
 
 # @app.post("/api/register", response_model=dict)

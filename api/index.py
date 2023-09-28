@@ -29,6 +29,10 @@ def read_users():
             } for user in DATABASE]
     return users
 
+@app.get("/api/carros")
+def hello_world():
+    return {"message": "Carros."}
+
 # @app.post("/api/register", response_model=dict)
 # def register_user(user: User):
 #     print('Enviando email')

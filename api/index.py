@@ -2,9 +2,9 @@ from typing import List, Dict
 
 from fastapi import FastAPI
 from fastapi import FastAPI, HTTPException
-import sqlite3
+# import sqlite3
 
-from api.models import User
+# from api.models import User
 # from api.database import conn, get_users
 
 app = FastAPI()
@@ -29,28 +29,28 @@ def read_users():
             } for user in DATABASE]
     return users
 
-@app.post("/api/register", response_model=dict)
-def register_user(user: User):
-    print('Enviando email')
+# @app.post("/api/register", response_model=dict)
+# def register_user(user: User):
+#     print('Enviando email')
 
-    try:
-        # conn = sqlite3.connect("users.db")
-        # cursor = conn.cursor()
+#     try:
+#         # conn = sqlite3.connect("users.db")
+#         # cursor = conn.cursor()
 
-        # # Insere os dados do usuário na tabela
-        # cursor.execute("INSERT INTO users (name, email, password, birthdate, state, city) VALUES (?, ?, ?, ?, ?, ?)",
-        #                (user.name, user.email, user.password, user.birthdate, user.state, user.city))
-        # conn.commit()
-        # conn.close()
-        DATABASE.append(user)
-        return {"message": "Usuário registrado com sucesso."}
-    except sqlite3.Error as e:
-        return HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")
+#         # # Insere os dados do usuário na tabela
+#         # cursor.execute("INSERT INTO users (name, email, password, birthdate, state, city) VALUES (?, ?, ?, ?, ?, ?)",
+#         #                (user.name, user.email, user.password, user.birthdate, user.state, user.city))
+#         # conn.commit()
+#         # conn.close()
+#         DATABASE.append(user)
+#         return {"message": "Usuário registrado com sucesso."}
+#     except sqlite3.Error as e:
+#         return HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")
 
-@app.get("/api/contact")
-def contact():
-    return {"message": "Hello World"}
+# @app.get("/api/contact")
+# def contact():
+#     return {"message": "Hello World"}
 
-@app.get("/api/login")
-def login():
-    return {"message": "Hello World"}
+# @app.get("/api/login")
+# def login():
+#     return {"message": "Hello World"}

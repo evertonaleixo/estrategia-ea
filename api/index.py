@@ -16,7 +16,7 @@ DATABASE = [1, 2, 3]
 #     conn 
 
 
-@app.get("/api/users", response_model=List[Dict[str, str]])
+@app.get("/api/users")
 def read_users():
     # users = get_users()
     users = [{

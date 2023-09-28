@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,7 @@ const Register = () => {
     estado: '',
   });
   const [isRegistered, setIsRegistered] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -21,14 +23,25 @@ const Register = () => {
     });
   };
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    // Aqui você pode adicionar lógica para registrar o usuário.
-    // Por exemplo, você pode enviar os dados para um servidor ou API.
+    const apiUrl = '/api/register'; // Change this URL to your API endpoint
 
-    // Após o registro bem-sucedido (ou simulação), definimos isRegistered como true.
-    setIsRegistered(true);
+    try {
+      setIsLoading(true);
+      // Send the form data to the API to register the user
+      const serverResp = await axios.post(apiUrl, formData);
+      console.log('serverResp', serverResp)
+      
+      // Registration successful, set isRegistered to true
+      setIsRegistered(true);
+    } catch (error) {
+      console.error('Error registering user:', error);
+      setIsRegistered(false);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -124,6 +137,12 @@ const Register = () => {
             Cadastrar
           </button>
         </form>
+
+        {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-75">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        )}
       </div>
     </div>
   );

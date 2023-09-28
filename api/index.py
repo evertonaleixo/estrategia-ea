@@ -17,7 +17,7 @@ DATABASE = []
 
 
 @app.get("/users", response_model=List[Dict[str, str]])
-async def read_users():
+def read_users():
     # users = get_users()
     users = [{
             "name": user.name,
@@ -30,7 +30,7 @@ async def read_users():
     return users
 
 @app.post("/register", response_model=dict)
-async def register_user(user: User):
+def register_user(user: User):
     print('Enviando email')
 
     try:

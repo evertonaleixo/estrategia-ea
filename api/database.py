@@ -57,6 +57,6 @@ from fastapi import FastAPI
 
 app = FastAPI()
 
-@app.get("/database")
+@app.get("/api/database")
 def hello_world():
     return {"message": "Hello World"}

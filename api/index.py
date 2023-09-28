@@ -5,18 +5,28 @@ from fastapi import FastAPI, HTTPException
 import sqlite3
 
 from api.models import User
-from api.database import conn, get_users
+# from api.database import conn, get_users
 
 app = FastAPI()
 
-@app.on_event("startup")  # This event handler will execute when the server starts
-async def startup_db():
-    conn 
+DATABASE = []
+
+# @app.on_event("startup")  # This event handler will execute when the server starts
+# async def startup_db():
+#     conn 
 
 
 @app.get("/users", response_model=List[Dict[str, str]])
 async def read_users():
-    users = get_users()
+    # users = get_users()
+    users = [{
+            "name": user.name,
+            "email": user.email,
+            "password": user.password,
+            "birthdate": user.birthdate,
+            "state": user.state,
+            "city": user.city
+            } for user in DATABASE]
     return users
 
 @app.post("/register", response_model=dict)
@@ -24,15 +34,15 @@ async def register_user(user: User):
     print('Enviando email')
 
     try:
-        conn = sqlite3.connect("users.db")
-        cursor = conn.cursor()
+        # conn = sqlite3.connect("users.db")
+        # cursor = conn.cursor()
 
-        # Insere os dados do usuário na tabela
-        cursor.execute("INSERT INTO users (name, email, password, birthdate, state, city) VALUES (?, ?, ?, ?, ?, ?)",
-                       (user.name, user.email, user.password, user.birthdate, user.state, user.city))
-        conn.commit()
-        conn.close()
-
+        # # Insere os dados do usuário na tabela
+        # cursor.execute("INSERT INTO users (name, email, password, birthdate, state, city) VALUES (?, ?, ?, ?, ?, ?)",
+        #                (user.name, user.email, user.password, user.birthdate, user.state, user.city))
+        # conn.commit()
+        # conn.close()
+        DATABASE.append(user)
         return {"message": "Usuário registrado com sucesso."}
     except sqlite3.Error as e:
         return HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")

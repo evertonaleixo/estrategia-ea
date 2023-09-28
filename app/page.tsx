@@ -26,11 +26,11 @@ export default function Home() {
     <main className="flex flex-col items-center justify-between middle-full">
       <div className="w-full max-w-md p-6 bg-gray-100 bg-opacity-25 rounded shadow-md">
         <div className="container">
-          <h1 style={{ padding: '4rem', color: 'white', fontSize: 'larger' }}>
+          <h1 style={{ padding: '2rem 3rem', color: 'white', fontSize: 'larger' }}>
             Consultoria Financeira com <br /><b>Emerson Lima Aleixo</b>.
           </h1>
 
-          <h3 style={{ marginBottom: '4rem', color: 'red', textTransform: 'uppercase' }}>
+          <h3 style={{ marginBottom: '1rem 3rem', color: 'white', textTransform: 'uppercase' }}>
             <b>
               Prepare-se para uma revolução financeira! Com um simples toque, você vai desbloquear o poder da inteligência artificial para conquistar seus sonhos financeiros como nunca antes. Deixe-nos mostrar o caminho para o sucesso financeiro total, começando com a sua renda e idade.
             </b>
@@ -55,7 +55,8 @@ export default function Home() {
             href={{
               pathname: '/result',
               query: {
-                rendimento: rendimentoMensal
+                rendimento: rendimentoMensal,
+                idade: idade
               }
             }}
           >

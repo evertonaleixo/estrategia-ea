@@ -31,7 +31,15 @@ const Register = () => {
     try {
       setIsLoading(true);
       // Send the form data to the API to register the user
-      const serverResp = await axios.post(apiUrl, formData);
+      const body = {
+        'name': formData.nome,
+        'email': formData.email,
+        'password': formData.senha,
+        'birthdate': formData.dataNascimento,
+        'state': formData.cidade,
+        'city': formData.estado,
+      };
+      const serverResp = await axios.post(apiUrl, body);
       console.log('serverResp', serverResp)
 
       // Registration successful, set isRegistered to true

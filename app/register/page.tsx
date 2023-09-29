@@ -41,15 +41,14 @@ const Register = () => {
         'state': formData.cidade,
         'city': formData.estado,
       };
-      const serverResp = await axios.post(apiUrl, body);
-      console.log('serverResp', serverResp, setErroMessage)
 
       // Registration successful, set isRegistered to true
       setIsRegistered(true);
-    } catch (error) {
+    } catch (error: any) {
       console.error('Error registering user:', error);
       setIsRegistered(false);
       setHasFailInRegister(true);
+      setErroMessage(error.response.data.detail);
     } finally {
       setIsLoading(false);
     }

@@ -104,7 +104,7 @@ def register_user(user: User):
         return {"message": f'User id: {user_id}'}
     except (Exception, Error) as e:
         print("Error inserting user:", e)
-        return HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")
     finally:
         # Close the database connection
         if conn:

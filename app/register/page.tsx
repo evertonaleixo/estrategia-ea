@@ -13,6 +13,7 @@ const Register = () => {
     estado: '',
   });
   const [isRegistered, setIsRegistered] = useState(false);
+  const [hasFailInRegister, setHasFailInRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleInputChange = (e: any) => {
@@ -47,6 +48,7 @@ const Register = () => {
     } catch (error) {
       console.error('Error registering user:', error);
       setIsRegistered(false);
+      setHasFailInRegister(true);
     } finally {
       setIsLoading(false);
     }
@@ -58,6 +60,9 @@ const Register = () => {
         <h1 className="text-2xl font-semibold mb-4">Criar Conta</h1>
         {isRegistered && (
           <p className="text-green-600 mb-4">Cadastro realizado com sucesso!</p>
+        )}
+        {hasFailInRegister && (
+          <p className="text-red-600 mb-4">Falha ao cadastrar! {erroMessage}</p>
         )}
         <form onSubmit={handleSubmit}>
           <div className="mb-4">

@@ -66,7 +66,13 @@ def hello_world():
     DATABASE.append(DATABASE[-1]+1)
     return {"message": "Carros."}
 
-@app.post("/api/register", response_model=dict)
+
+@app.get("/api/register")
+def hello_world():
+    DATABASE.append(DATABASE[-1]+1)
+    return {"message": "Carros."}
+
+@app.post("/api/register")
 def register_user(user: User):
     print('Enviando email')
 

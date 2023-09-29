@@ -29,7 +29,7 @@ class User(BaseModel):
 
 app = FastAPI()
 
-connection_string = os.getenv('DB_URL')
+CONNECTION_STRING = os.getenv('DB_URL')
 SENDGRID_API_KEY = os.environ.get("SENDGRID_KEY")
 
 def send_email(title: str, user: User):
@@ -37,10 +37,12 @@ def send_email(title: str, user: User):
     sg = SendGridAPIClient(api_key=SENDGRID_API_KEY)
 
     # Define the email content
-    subject = f"[{title}]Novo cliente: {user.name}"
+    subject = f"[{title}]{user.name}"
     sender_email = "everton.jiujitsu@gmail.com"
     receiver_email = "everton.jiujitsu@gmail.com"
     message_text = f"Entrar em contato com {user.name} pelo e-mail {user.email} ou pelo telefone: {user.phone}"
+    if user.message:
+        message_text = f'{message_text}\n\nMensagem: {user.message}.'
 
     # Create a Mail object
     message = Mail(
@@ -63,12 +65,12 @@ def send_email(title: str, user: User):
 @app.on_event("startup")  # This event handler will execute when the server starts
 async def startup_db():
     load_dotenv()
-    print(f'connection: {connection_string}')
+    print(f'connection: {CONNECTION_STRING}')
 
 def get_users():
     try:
         # Replace with your database file path
-        conn = psycopg2.connect(connection_string)
+        conn = psycopg2.connect(CONNECTION_STRING)
         # Create a cursor object
         cur = conn.cursor()
 
@@ -103,7 +105,7 @@ def read_users():
 @app.post("/api/user")
 def register_user(user: User):
     try:
-        conn = psycopg2.connect(connection_string)
+        conn = psycopg2.connect(CONNECTION_STRING)
 
         # Create a cursor object
         cur = conn.cursor()
@@ -147,7 +149,7 @@ def register_user(user: User):
 @app.post("/api/contact")
 def register_contact(user: User):
     try:
-        conn = psycopg2.connect(connection_string)
+        conn = psycopg2.connect(CONNECTION_STRING)
 
         # Create a cursor object
         cur = conn.cursor()

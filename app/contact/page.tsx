@@ -52,16 +52,11 @@ const Contact = () => {
         email: '',
         message: '',
       });
-      // Registration successful, set isRegistered to true
-      // setIsRegistered(true);
-      // setHasFailInRegister(false);
     } catch (error: any) {
       console.error('Error registering user:', error);
       setIsSubmitted(false);
       setIsError(true);
 
-      // setIsRegistered(false);
-      // setHasFailInRegister(true);
       setErroMessage(error.response.data.detail);
     } finally {
       setIsLoading(false);

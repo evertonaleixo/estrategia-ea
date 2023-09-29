@@ -15,6 +15,7 @@ const Register = () => {
   const [isRegistered, setIsRegistered] = useState(false);
   const [hasFailInRegister, setHasFailInRegister] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [erroMessage, setErroMessage] = useState('');
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -41,7 +42,7 @@ const Register = () => {
         'city': formData.estado,
       };
       const serverResp = await axios.post(apiUrl, body);
-      console.log('serverResp', serverResp)
+      console.log('serverResp', serverResp, setErroMessage)
 
       // Registration successful, set isRegistered to true
       setIsRegistered(true);

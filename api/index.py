@@ -154,7 +154,7 @@ def register_contact(user: User):
 
         # Define the SQL query to insert a user
         insert_query = """
-        INSERT INTO users (name, email, phone, message)
+        INSERT INTO contact (name, email, phone, message)
         VALUES (%s, %s, %s, %s)
         RETURNING id;
         """

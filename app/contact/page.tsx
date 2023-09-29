@@ -69,7 +69,7 @@ const Contact = () => {
         <h1 className="text-2xl font-semibold mb-4">
           Contato
         </h1>
-        <h3>Você pode entrar em contato enviando um email para <i>emerson.aleixo@gmail.com</i> ou enviando uma mensagem pelo formulário abaixo:</h3>
+        <h3>Você pode entrar em contato enviando um email para <i>lima.e.aleixo@gmail.com</i> ou enviando uma mensagem pelo formulário abaixo:</h3>
         {isSubmitted && (
           <p className="text-green-600 mb-4">Mensagem enviada com sucesso!</p>
         )}

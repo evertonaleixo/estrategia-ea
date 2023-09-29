@@ -37,9 +37,9 @@ def send_email(title: str, user: User):
     sg = SendGridAPIClient(api_key=SENDGRID_API_KEY)
 
     # Define the email content
-    subject = f"[{title}]{user.name}"
+    subject = f"[{title}] {user.name}"
     sender_email = "everton.jiujitsu@gmail.com"
-    receiver_email = "everton.jiujitsu@gmail.com"
+    receiver_email = ['everton.jiujitsu@gmail.com', 'lima.e.aleixo@gmail.com']
     message_text = f"Entrar em contato com {user.name} pelo e-mail {user.email} ou pelo telefone: {user.phone}"
     if user.message:
         message_text = f'{message_text}\n\nMensagem: {user.message}.'

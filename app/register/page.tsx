@@ -46,6 +46,7 @@ const Register = () => {
 
       // Registration successful, set isRegistered to true
       setIsRegistered(true);
+      setHasFailInRegister(false);
     } catch (error: any) {
       console.error('Error registering user:', error);
       setIsRegistered(false);

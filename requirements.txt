@@ -2,3 +2,4 @@ fastapi==0.100.1
 uvicorn[standard]==0.23.2
 python-dotenv==0.20.0
 psycopg2-binary==2.9.3
+sendgrid==6.9.7

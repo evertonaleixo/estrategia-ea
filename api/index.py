@@ -143,3 +143,45 @@ def register_user(user: User):
         if conn:
             conn.close()
 
+
+@app.post("/api/contact")
+def register_contact(user: User):
+    try:
+        conn = psycopg2.connect(connection_string)
+
+        # Create a cursor object
+        cur = conn.cursor()
+
+        # Define the SQL query to insert a user
+        insert_query = """
+        INSERT INTO users (name, email, phone, message)
+        VALUES (%s, %s, %s, %s)
+        RETURNING id;
+        """
+
+        # Execute the query with user data
+        cur.execute(insert_query, (
+            user.name,
+            user.email,
+            user.phone,
+            user.message
+        ))
+
+        # Fetch the inserted user's ID
+        user_id = cur.fetchone()[0]
+
+        # Commit the transaction and close the cursor
+        cur.close()
+        conn.commit()
+
+        send_email('CONTATO', user)
+
+        return {"message": f'User id: {user_id}'}
+    except (Exception, Error) as e:
+        print("Error inserting user:", e)
+        raise HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")
+    finally:
+        # Close the database connection
+        if conn:
+            conn.close()
+

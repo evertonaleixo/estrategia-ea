@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import axios from 'axios';
 
 
 const Contact = () => {
@@ -12,6 +13,9 @@ const Contact = () => {
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isError, setIsError] = useState(false);
+  const [erroMessage, setErroMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -24,12 +28,22 @@ const Contact = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    // Aqui você pode adicionar lógica para enviar os dados do formulário.
-    // Por exemplo, você pode usar a função fetch() para enviar os dados para um servidor ou API.
+    
+    const apiUrl = '/api/contact'; // Change this URL to your API endpoint
 
     try {
-      // Simular um envio bem-sucedido (aqui você pode adicionar sua lógica de envio real)
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setIsLoading(true);
+      // Send the form data to the API to register the user
+      const body = {
+        'name': formData.name,
+        'email': formData.email,
+        'phone': formData.phone,
+        'message': formData.message,
+      };
+
+      const serverResp = await axios.post(apiUrl, body);
+      console.log('serverResp', serverResp)
+
       setIsSubmitted(true);
       setIsError(false);
       setFormData({
@@ -38,9 +52,19 @@ const Contact = () => {
         email: '',
         message: '',
       });
-    } catch (error) {
+      // Registration successful, set isRegistered to true
+      // setIsRegistered(true);
+      // setHasFailInRegister(false);
+    } catch (error: any) {
+      console.error('Error registering user:', error);
       setIsSubmitted(false);
       setIsError(true);
+
+      // setIsRegistered(false);
+      // setHasFailInRegister(true);
+      setErroMessage(error.response.data.detail);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -118,6 +142,12 @@ const Contact = () => {
           </button>
         </form>
       </div>
+
+      {isLoading && (
+          <div className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-75">
+            <div className="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500"></div>
+          </div>
+        )}
     </div>
   );
 };

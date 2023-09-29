@@ -61,18 +61,18 @@ def read_users():
             } for user in DATABASE]
     return users
 
-@app.get("/api/carros")
+@app.get("/api/carros/create")
 def hello_world():
     DATABASE.append(DATABASE[-1]+1)
     return {"message": "Carros."}
 
 
-@app.get("/api/register")
-def hello_world():
+@app.get("/api/create")
+def create_user():
     DATABASE.append(DATABASE[-1]+1)
-    return {"message": "Carros."}
+    return {"message": "Create."}
 
-@app.post("/api/register")
+@app.post("/api/create")
 def register_user(user: User):
     print('Enviando email')
 

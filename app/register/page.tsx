@@ -26,14 +26,14 @@ const Register = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
 
-    const apiUrl = '/api/register'; // Change this URL to your API endpoint
+    const apiUrl = '/api/user'; // Change this URL to your API endpoint
 
     try {
       setIsLoading(true);
       // Send the form data to the API to register the user
       const serverResp = await axios.post(apiUrl, formData);
       console.log('serverResp', serverResp)
-      
+
       // Registration successful, set isRegistered to true
       setIsRegistered(true);
     } catch (error) {

@@ -32,47 +32,42 @@ async def startup_db():
     print(f'connection: {connection_string}')
 
 
-# def get_users():
-#     try:
-#         # Replace with your database file path
-#         conn = sqlite3.connect("users.db")
-#         cursor = conn.cursor()
-#         cursor.execute(
-#             "SELECT id, name, email, password, birthdate, state, city FROM users ORDER BY name")
-#         users = cursor.fetchall()
-#         return [{
-#             "id": user[0],
-#             "name": user[1],
-#             "email": user[2],
-#             "password": user[3],
-#             "birthdate": user[4],
-#             "state": user[5],
-#             "city": user[6]
-#         } for user in users]
-#     except sqlite3.Error as e:
-#         print("SQLite error:", e)
-#         return []
+def get_users():
+    try:
+        # Replace with your database file path
+        conn = psycopg2.connect(connection_string)
+        # Create a cursor object
+        cur = conn.cursor()
 
+        cur.execute(
+            "SELECT id, name, email, password, birthdate, state, city FROM users ORDER BY name")
+        users = cur.fetchall()
+        return [{
+            "id": user[0],
+            "name": user[1],
+            "email": user[2],
+            "password": user[3],
+            "birthdate": user[4],
+            "state": user[5],
+            "city": user[6]
+        } for user in users]
+    
+    except (Exception, Error) as e:
+        print("Error inserting user:", e)
+        return []
+    finally:
+        # Close the database connection
+        if conn:
+            conn.close()
+    return []
+    
 @app.get("/api/users")
 def read_users():
-    # users = get_users()
-    users = [{
-            "id": user,
-            } for user in DATABASE]
+    users = get_users()
+    
     return users
 
-@app.get("/api/carros/create")
-def hello_world():
-    DATABASE.append(DATABASE[-1]+1)
-    return {"message": "Carros."}
-
-
-@app.get("/api/create")
-def create_user():
-    DATABASE.append(DATABASE[-1]+1)
-    return {"message": "Create."}
-
-@app.post("/api/create")
+@app.post("/api/user")
 def register_user(user: User):
     print('Enviando email')
 
@@ -106,7 +101,7 @@ def register_user(user: User):
         cur.close()
         conn.commit()
 
-        return {"message": f'success'}
+        return {"message": f'User id: {user_id}'}
     except (Exception, Error) as e:
         print("Error inserting user:", e)
         return HTTPException(status_code=500, detail=f"Erro ao registrar usuário: {str(e)}")
@@ -115,10 +110,3 @@ def register_user(user: User):
         if conn:
             conn.close()
 
-# @app.get("/api/contact")
-# def contact():
-#     return {"message": "Hello World"}
-
-# @app.get("/api/login")
-# def login():
-#     return {"message": "Hello World"}

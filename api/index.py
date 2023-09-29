@@ -1,4 +1,5 @@
 import os
+import hashlib
 
 from typing import Optional
 from dotenv import load_dotenv
@@ -88,7 +89,7 @@ def register_user(user: User):
         cur.execute(insert_query, (
             user.name,
             user.email,
-            user.password,
+            hashlib.md5(user.password.encode()).hexdigest(),
             user.birthdate,
             user.state,
             user.city
